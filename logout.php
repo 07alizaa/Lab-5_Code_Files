@@ -17,7 +17,7 @@ if (isset($_COOKIE['remember_username'])) {
 	setcookie('remember_username', '', time() - 3600, '/');
 }
 
-// Redirect to login (index.php)
-header('Location: index.php?msg=' . urlencode('You have been logged out.'));
+// Redirect to login (index.html)
+header('Location: index.html?msg=' . urlencode('You have been logged out.'));
 exit();
 ?>

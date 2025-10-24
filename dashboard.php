@@ -4,7 +4,7 @@ session_start();
 
 // Require login
 if (!isset($_SESSION['user_id'])) {
-    header('Location: index.php?msg=' . urlencode('Please log in.'));
+    header('Location: index.html?msg=' . urlencode('Please log in.'));
     exit();
 }
 
@@ -14,7 +14,7 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 
     // Destroy session and redirect to login with message
     session_unset();
     session_destroy();
-    header('Location: index.php?msg=' . urlencode('Session expired. Please log in again.'));
+    header('Location: index.html?msg=' . urlencode('Session expired. Please log in again.'));
     exit();
 }
 // Update last activity time

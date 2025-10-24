@@ -5,15 +5,15 @@ require_once __DIR__ . '/db.php';
 
 // Require login
 if (!isset($_SESSION['user_id'])) {
-    header('Location: index.php?msg=' . urlencode('Please log in.'));
-    exit();
+  header('Location: index.html?msg=' . urlencode('Please log in.'));
+  exit();
 }
 
 // Session timeout (10 minutes)
 $timeoutSecs = 10 * 60;
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $timeoutSecs)) {
-    session_unset(); session_destroy();
-    header('Location: index.php?msg=' . urlencode('Session expired. Please log in again.'));
+  session_unset(); session_destroy();
+  header('Location: index.html?msg=' . urlencode('Session expired. Please log in again.'));
     exit();
 }
 $_SESSION['last_activity'] = time();

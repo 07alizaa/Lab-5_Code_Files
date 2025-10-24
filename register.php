@@ -37,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]);
 
             // Registration successful
-            $success = 'Registration successful. You can now <a href="index.php">log in</a>.';
+            // Link back to the original frontend login page (index.html)
+            $success = 'Registration successful. You can now <a href="index.html">log in</a>.';
         } catch (PDOException $e) {
             // Handle duplicate username/email constraint (SQLSTATE 23000)
             if ($e->getCode() === '23000') {
@@ -85,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <button type="submit">Register</button>
     </form>
 
-    <p style="text-align:center;margin-top:10px;"><a href="index.php">Back to Login</a></p>
+  <p style="text-align:center;margin-top:10px;"><a href="index.html">Back to Login</a></p>
   </div>
 </body>
 </html>

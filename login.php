@@ -18,7 +18,7 @@ if (!isset($_SESSION['login_attempts'])) {
 }
 
 // Helper redirect with message
-function redirect($url = 'index.php', $msg = '') {
+function redirect($url = 'index.html', $msg = '') {
     if ($msg !== '') {
         $url .= (strpos($url, '?') === false ? '?' : '&') . 'msg=' . urlencode($msg);
     }
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_SESSION['login_attempts'] >= $maxAttempts) {
         $elapsed = time() - ($_SESSION['last_attempt_time'] ?? 0);
         if ($elapsed < $lockoutSecs) {
-            redirect('index.php', 'Too many attempts. Try again later.');
+        redirect('index.html', 'Too many attempts. Try again later.');
         } else {
             // Reset after lockout period
             $_SESSION['login_attempts'] = 0;
@@ -50,13 +50,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_SESSION['captcha_answer']) || (string)$_SESSION['captcha_answer'] !== $captcha) {
         $_SESSION['login_attempts']++;
         $_SESSION['last_attempt_time'] = time();
-        redirect('index.php', 'Invalid CAPTCHA.');
+    redirect('index.html', 'Invalid CAPTCHA.');
     }
 
     if ($username === '' || $password === '') {
         $_SESSION['login_attempts']++;
         $_SESSION['last_attempt_time'] = time();
-        redirect('index.php', 'Please provide username and password.');
+    redirect('index.html', 'Please provide username and password.');
     }
 
     // Fetch user from DB using prepared statement
@@ -89,10 +89,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Invalid credentials
         $_SESSION['login_attempts']++;
         $_SESSION['last_attempt_time'] = time();
-        redirect('index.php', 'Invalid username or password.');
+    redirect('index.html', 'Invalid username or password.');
     }
 }
 
 // If not POST, send back to login
-redirect('index.php');
+redirect('index.html');
 ?>
